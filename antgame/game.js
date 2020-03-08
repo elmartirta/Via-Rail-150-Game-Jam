@@ -11,7 +11,7 @@ function setup(){
   background(dirt_brown);
 
   dave = new Ant(100, 100, red);
-  dave.goal = new Vector(100, 150)
+  dave.goal = createVector(100, 150)
 }
 
 function draw(){

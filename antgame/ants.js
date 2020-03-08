@@ -31,36 +31,30 @@ class Ant {
   * Direct the ant towards a goal position
   */
   moveTo(goal){
-    if(goal.x == this.pos.x && goal.y == this.pos.y){
+    if(goal.equals(this.pos)){
       return;
     }
-    const distanceToGoal = new Vector(goal.x - this.pos.x, goal.y - this.pos.y);
-    if (distanceToGoal.cheap_length() < 2){
-      var movementToGoal = distanceToGoal;
-    }else{
-      var movementToGoal = distanceToGoal.set_length(2);
-    }
-    movementToGoal.push(this.pos);
+    
+    let movement = goal.copy().sub(this.pos).limit(2);
+    this.pos.add(movement);
   }
   /**
   * Direct the ant to its own internal goal state.
   */
   moveToGoal(){
-    if (this.goal.x == undefined || this.goal.y == undefined){
-      return;
-    }else{
-      this.moveTo(this.goal);
-      fill(0,100,0);
-      stroke(0,100,0);
-      rect(this.goal.x, this.goal.y,2,2);
-    }
+    //Move to goal
+    this.moveTo(this.goal);
+    
+    //Draw Goal Node
+    fill(0,100,0);
+    stroke(0,100,0);
+    rect(this.goal.x, this.goal.y,2,2);
   }
   /**
   * Run this function every tick
   */
   tick(){
-    this.pos.x += this.speed.x;
-    this.pos.y += this.speed.y;
+    this.pos.add(this.speed);
   }
   reactToKeyPress(keyCode){
     switch(keyCode){//w
