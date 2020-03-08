@@ -1,23 +1,27 @@
-const brightness = 30;
-const DIRT_BROWN = {r: 180 + brightness, g: 140 + brightness, b: 60 + brightness};
-const RED = {r: 256, g: 0, b: 0};
+var dirt_brown;
+var red;
 
 var dave;
 
 function setup(){
+  dirt_brown = color(210, 190, 90);
+  red = color(256, 0, 0);
+  
   createCanvas(300,300);
-  background(DIRT_BROWN.r, DIRT_BROWN.g, DIRT_BROWN.b);
+  background(dirt_brown);
 
-  dave = new Ant(100, 100, RED);
+  dave = new Ant(100, 100, red);
   dave.goal = new Vector(100, 150)
 }
+
 function draw(){
-  background(DIRT_BROWN.r, DIRT_BROWN.g, DIRT_BROWN.b);
+  background(dirt_brown);
 
   dave.draw();
   dave.tick();
   dave.moveToGoal();
 }
+
 function keyPressed(){
   dave.reactToKeyPress(keyCode);
 }

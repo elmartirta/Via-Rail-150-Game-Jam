@@ -23,8 +23,8 @@ class Ant {
   * Draws the ant on the p5.js canvas
   */
   draw(){
-    fill(this.color.r, this.color.g, this.color.b)
-    stroke(this.color.r, this.color.g, this.color.b)
+    fill(this.color)
+    stroke(this.color)
     rect(this.pos.x, this.pos.y, 2, 2);
   }
   /**
