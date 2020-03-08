@@ -1,25 +1,43 @@
-
+/**
+* In this game, the player controls a set of ants, 
+* which gather food, attack enemy ant nests, and 
+* build structures in their home to grow larger and
+* stronger.
+*/
 class Ant {
   constructor(x=0, y=0, color){
+    //Ants have position
     this.x = x;
     this.y = y;
+    
+    //Ants have a current speed
     this.xspeed = 0;
     this.yspeed = 0;
+    
+    //Ants have goals
     this.xgoal = undefined;
     this.ygoal = undefined;
+    
+    //Ants have colors
     this.color = color;
 
   }
+  /**
+  * Draws the ant on the p5.js canvas
+  */
   draw(){
     fill(this.color.r, this.color.g, this.color.b)
     stroke(this.color.r, this.color.g, this.color.b)
     rect(this.x, this.y, 2, 2);
   }
-  moveTo(xloc, yloc){
-    if(xloc == this.x && yloc == this.y){
+  /**
+  * Direct the ant towards a goal position
+  */
+  moveTo(goalx, goaly){
+    if(goalx == this.x && goaly == this.y){
       return;
     }
-    const distanceToGoal = new Vector(xloc - this.x, yloc - this.y);
+    const distanceToGoal = new Vector(goalx - this.x, goaly - this.y);
     if (distanceToGoal.cheap_length() < 2){
       var movementToGoal = distanceToGoal;
     }else{
@@ -27,6 +45,9 @@ class Ant {
     }
     movementToGoal.push(this);
   }
+  /**
+  * Direct the ant to its own internal goal state.
+  */
   moveToGoal(){
     if (this.xgoal == undefined || this.ygoal == undefined){
       return;
@@ -37,6 +58,9 @@ class Ant {
       rect(this.xgoal, this.ygoal,2,2);
     }
   }
+  /**
+  * Run this function every tick
+  */
   tick(){
     this.x += this.xspeed;
     this.y += this.yspeed;

@@ -1,4 +1,3 @@
-
 const brightness = 30;
 const DIRT_BROWN = {r: 180 + brightness, g: 140 + brightness, b: 60 + brightness};
 const RED = {r: 256, g: 0, b: 0};
