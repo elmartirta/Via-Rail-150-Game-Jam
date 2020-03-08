@@ -9,8 +9,7 @@ function setup(){
   background(DIRT_BROWN.r, DIRT_BROWN.g, DIRT_BROWN.b);
 
   dave = new Ant(100, 100, RED);
-  dave.xgoal = 100;
-  dave.ygoal = 150;
+  dave.goal = new Vector(100, 150)
 }
 function draw(){
   background(DIRT_BROWN.r, DIRT_BROWN.g, DIRT_BROWN.b);

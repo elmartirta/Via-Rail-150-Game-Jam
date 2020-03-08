@@ -7,16 +7,13 @@
 class Ant {
   constructor(x=0, y=0, color){
     //Ants have position
-    this.x = x;
-    this.y = y;
+    this.pos = createVector(x,y);
     
     //Ants have a current speed
-    this.xspeed = 0;
-    this.yspeed = 0;
+    this.speed = createVector(0,0);
     
     //Ants have goals
-    this.xgoal = undefined;
-    this.ygoal = undefined;
+    this.goal = createVector(undefined,undefined)
     
     //Ants have colors
     this.color = color;
@@ -28,56 +25,56 @@ class Ant {
   draw(){
     fill(this.color.r, this.color.g, this.color.b)
     stroke(this.color.r, this.color.g, this.color.b)
-    rect(this.x, this.y, 2, 2);
+    rect(this.pos.x, this.pos.y, 2, 2);
   }
   /**
   * Direct the ant towards a goal position
   */
-  moveTo(goalx, goaly){
-    if(goalx == this.x && goaly == this.y){
+  moveTo(goal){
+    if(goal.x == this.pos.x && goal.y == this.pos.y){
       return;
     }
-    const distanceToGoal = new Vector(goalx - this.x, goaly - this.y);
+    const distanceToGoal = new Vector(goal.x - this.pos.x, goal.y - this.pos.y);
     if (distanceToGoal.cheap_length() < 2){
       var movementToGoal = distanceToGoal;
     }else{
       var movementToGoal = distanceToGoal.set_length(2);
     }
-    movementToGoal.push(this);
+    movementToGoal.push(this.pos);
   }
   /**
   * Direct the ant to its own internal goal state.
   */
   moveToGoal(){
-    if (this.xgoal == undefined || this.ygoal == undefined){
+    if (this.goal.x == undefined || this.goal.y == undefined){
       return;
     }else{
-      this.moveTo(this.xgoal, this.ygoal);
+      this.moveTo(this.goal);
       fill(0,100,0);
       stroke(0,100,0);
-      rect(this.xgoal, this.ygoal,2,2);
+      rect(this.goal.x, this.goal.y,2,2);
     }
   }
   /**
   * Run this function every tick
   */
   tick(){
-    this.x += this.xspeed;
-    this.y += this.yspeed;
+    this.pos.x += this.speed.x;
+    this.pos.y += this.speed.y;
   }
   reactToKeyPress(keyCode){
     switch(keyCode){//w
-      case 87://w
-        this.ygoal -= 100;
+      case 87://w -> up -> (-y)
+        this.goal.y -= 100;
         break;
-      case 65://a
-        this.xgoal -= 100;
+      case 65://a -> left -> (-x)
+        this.goal.x -= 100;
         break;
-      case 83://s
-        this.ygoal += 100;
+      case 83://s -> down -> (+y)
+        this.goal.y += 100;
         break;
-      case 68://d
-        this.xgoal += 100;
+      case 68://d -> right -> (+x)
+        this.goal.x += 100;
         break;
     }
   }
