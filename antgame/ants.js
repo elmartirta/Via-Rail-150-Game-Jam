@@ -6,16 +6,9 @@
 */
 class Ant {
   constructor(x=0, y=0, color){
-    //Ants have position
     this.pos = createVector(x,y);
-    
-    //Ants have a current speed
     this.speed = createVector(0,0);
-    
-    //Ants have goals
     this.goal = createVector(undefined,undefined)
-    
-    //Ants have colors
     this.color = color;
 
   }
@@ -28,7 +21,7 @@ class Ant {
     rect(this.pos.x, this.pos.y, 2, 2);
   }
   /**
-  * Direct the ant towards a goal position
+  * Move the ant towards a goal position
   */
   moveTo(goal){
     if(goal.equals(this.pos)){
@@ -39,13 +32,12 @@ class Ant {
     this.pos.add(movement);
   }
   /**
-  * Direct the ant to its own internal goal state.
+  * Move the ant to its own internal goal state.
   */
   moveToGoal(){
-    //Move to goal
     this.moveTo(this.goal);
     
-    //Draw Goal Node
+    //[DEBUGGING] Draw Goal Node
     fill(0,100,0);
     stroke(0,100,0);
     rect(this.goal.x, this.goal.y,2,2);
